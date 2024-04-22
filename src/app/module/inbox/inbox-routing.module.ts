@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import {InboxComponent} from "./inbox.component";
 
 const routes: Routes = [
   {
     path: "",
-    loadChildren: () => import('./module/inbox/inbox.module').then(m => m.InboxModule)
+    component: InboxComponent,
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class InboxRoutingModule { }

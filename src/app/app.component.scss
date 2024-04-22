@@ -1,0 +1,10 @@
+.main_section{
+  display: flex;
+}
+.app-side-bar{
+  width: 280px;
+}
+.router-outlet{
+  width: calc(100% - 280px);
+  margin-right: auto;
+}
