@@ -12,21 +12,18 @@ import {ConfirmationService} from "primeng/api";
 })
 export class TaskListComponent {
   data_task:any;
-  is_data_task:boolean = false;
   constructor(private confirmationService: ConfirmationService,private InboxService:InboxService,private dbService: NgxIndexedDBService) {
     this.InboxService.BehaviorSubject_add_task.subscribe(
       () => {
         this.dbService.getAll('task').subscribe((task:any[]) => {
           this.data_task = task;
-          if (this.data_task.length >= 0){
-            this.is_data_task = true;
-          }
         });
       }
     )
   }
 
   remove(id:any,event:MouseEvent) {
+    event.stopPropagation();
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'آیا مطمئنید که میخواهید حذف کنید ؟',
@@ -47,9 +44,18 @@ export class TaskListComponent {
       }
     });
   }
-  edite(id:any){
+  edite(id:any,event:MouseEvent){
+    event.stopPropagation();
     this.InboxService.for_open_close_box_edite_task.set(id)
     this.InboxService.BehaviorSubject_edite_task.next(true);
+  }
+
+
+  visible: boolean = false;
+  showDialog_data:any;
+  showDialog(id:number) {
+    this.showDialog_data = this.data_task.find((obj:any) => obj.id === id)
+    this.visible = true;
   }
 
 }

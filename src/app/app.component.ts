@@ -8,5 +8,11 @@ import {InboxService} from "./services/inbox.service";
   providers: [MessageService]
 })
 export class AppComponent {
-  constructor(protected InboxService: InboxService) {}
+  constructor(protected InboxService: InboxService) {
+
+    if (window.innerWidth <= 1200){
+      this.InboxService.is_aside.set(true)
+    }
+
+  }
 }

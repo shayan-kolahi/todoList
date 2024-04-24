@@ -11,6 +11,7 @@ import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {ShareModule} from "../share/share.module";
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {ShareModule} from "../share/share.module";
     ButtonModule,
     ToastModule,
     ConfirmDialogModule,
-    ShareModule
+    ShareModule,
+    DialogModule
   ]
 })
 export class InboxModule { }
