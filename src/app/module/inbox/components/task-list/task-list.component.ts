@@ -14,7 +14,7 @@ export class TaskListComponent {
   data_task:any;
   is_data_task:boolean = false;
   constructor(private confirmationService: ConfirmationService,private InboxService:InboxService,private dbService: NgxIndexedDBService) {
-    this.InboxService.numberCard.subscribe(
+    this.InboxService.BehaviorSubject_add_task.subscribe(
       () => {
         this.dbService.getAll('task').subscribe((task:any[]) => {
           this.data_task = task;
@@ -40,14 +40,16 @@ export class TaskListComponent {
       accept: () => {
         this.dbService.bulkDelete('task', [id]).subscribe((result) => {
           this.data_task = result[0];
-          this.InboxService.numberCard.next(true);
+          this.InboxService.BehaviorSubject_add_task.next(true);
         });
       },
       reject: () => {
       }
     });
-
-
+  }
+  edite(id:any){
+    this.InboxService.for_open_close_box_edite_task.set(id)
+    this.InboxService.BehaviorSubject_edite_task.next(true);
   }
 
 }

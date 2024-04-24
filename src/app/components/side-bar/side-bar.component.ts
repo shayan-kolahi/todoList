@@ -10,7 +10,7 @@ import {NgxIndexedDBService} from "ngx-indexed-db";
 export class SideBarComponent {
   data_task:number = 0;
   constructor(protected InboxService: InboxService,private dbService: NgxIndexedDBService) {
-    this.InboxService.numberCard.subscribe(
+    this.InboxService.BehaviorSubject_add_task.subscribe(
       () => {
         this.dbService.getAll('task').subscribe((task:any[]) => {
           this.data_task = task.length;

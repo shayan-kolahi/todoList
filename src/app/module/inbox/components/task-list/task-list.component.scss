@@ -8,10 +8,20 @@
       font-family: $font-family-Bold;
       font-size: 15px;
       margin-bottom: 5px;
+      text-align: justify;
+      overflow: hidden;
+        display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
     }
     h3{
       font-size: 14px;
       margin: 0;
+      text-align: justify;
+      overflow: hidden;
+        display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
     }
     button{
       opacity: 0;

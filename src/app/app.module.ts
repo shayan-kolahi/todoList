@@ -7,7 +7,8 @@ import { SideBarComponent } from './components/side-bar/side-bar.component';
 import { HeaderComponent } from './components/header/header.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ShareModule} from "./module/share/share.module";
-
+import { TooltipModule } from 'primeng/tooltip';
+import {InputTextModule} from "primeng/inputtext";
 
 
 @NgModule({
@@ -20,7 +21,9 @@ import {ShareModule} from "./module/share/share.module";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ShareModule
+    ShareModule,
+    TooltipModule,
+    InputTextModule
   ],
   providers: [],
   bootstrap: [AppComponent]
