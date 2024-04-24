@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {InboxService} from "../../services/inbox.service";
 
 @Component({
   selector: 'app-header',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  constructor(protected InboxService: InboxService) {}
 
+  openMenu() {
+    this.InboxService.is_aside.set(false)
+  }
 }

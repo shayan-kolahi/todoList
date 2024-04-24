@@ -3,8 +3,18 @@
 }
 .app-side-bar{
   width: 280px;
+  right: 0;
+  transition: .5s all;
+  &.close{
+    position: absolute;
+    right: -100%
+  }
 }
 .router-outlet{
   width: calc(100% - 280px);
   margin-right: auto;
+  transition: .2s all;
+  &.open{
+    width: 100%;
+  }
 }

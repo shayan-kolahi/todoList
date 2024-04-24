@@ -114,7 +114,7 @@ ul > li > a.active {
   margin-bottom: .5rem;
   div{
     display: flex;
-    button{
+    .btn_profile{
       display: flex;
       align-items: center;
       padding: 0 6px;
@@ -149,7 +149,7 @@ ul > li > a.active {
         }
       }
     }
-    a{
+    .btn_small{
       width: 32px;
       height: 32px;
       border-radius: 5px;

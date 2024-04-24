@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {InboxService} from "../../services/inbox.service";
 import {NgxIndexedDBService} from "ngx-indexed-db";
 
@@ -8,6 +8,8 @@ import {NgxIndexedDBService} from "ngx-indexed-db";
   styleUrl: './side-bar.component.scss',
 })
 export class SideBarComponent {
+
+
   data_task:number = 0;
   constructor(protected InboxService: InboxService,private dbService: NgxIndexedDBService) {
     this.InboxService.BehaviorSubject_add_task.subscribe(
@@ -17,5 +19,9 @@ export class SideBarComponent {
         });
       }
     )
+  }
+
+  closeMenu() {
+    this.InboxService.is_aside.set(true)
   }
 }
