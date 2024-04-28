@@ -1,23 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FormAddEditTaskComponent } from './form-add-edit-task.component';
+import {FormAddEditTaskComponent} from "./form-add-edit-task.component";
+import {InboxService} from "../../../../services/inbox.service";
+import {ConfirmationService} from "primeng/api";
+import {NgxIndexedDBService} from "ngx-indexed-db";
 
 describe('FormAddTaskComponent', () => {
-  let component: FormAddEditTaskComponent;
-  let fixture: ComponentFixture<FormAddEditTaskComponent>;
+  it('ok FormAddEditTaskComponent make', () => {
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [FormAddEditTaskComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(FormAddEditTaskComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 });

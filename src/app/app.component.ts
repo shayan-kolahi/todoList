@@ -15,4 +15,6 @@ export class AppComponent {
     }
 
   }
+
+  sut:any = true
 }

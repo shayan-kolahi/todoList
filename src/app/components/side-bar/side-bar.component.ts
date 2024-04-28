@@ -11,7 +11,7 @@ export class SideBarComponent {
 
 
   data_task:number = 0;
-  constructor(protected InboxService: InboxService,private dbService: NgxIndexedDBService) {
+  constructor(private InboxService: InboxService,private dbService: NgxIndexedDBService) {
     this.InboxService.BehaviorSubject_add_task.subscribe(
       () => {
         this.dbService.getAll('task').subscribe((task:any[]) => {
