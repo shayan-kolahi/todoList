@@ -1,8 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, ViewChild} from '@angular/core';
 import {InboxService} from "../../../../services/inbox.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ConfirmationService} from "primeng/api";
 import {NgxIndexedDBService} from "ngx-indexed-db";
+import {Subscription} from "rxjs";
+import {TEXT_1, TEXT_2, TEXT_3, TEXT_4} from '../../../../../assets/lang/fa';
+
 
 @Component({
   selector: 'app-form-add-edit-task',
@@ -10,54 +13,57 @@ import {NgxIndexedDBService} from "ngx-indexed-db";
   styleUrl: './form-add-edit-task.component.scss',
   providers: [ConfirmationService]
 })
-export class FormAddEditTaskComponent {
+export class FormAddEditTaskComponent implements OnDestroy {
   profileForm: FormGroup = new FormGroup({
     taskName: new FormControl(""),
     description: new FormControl(""),
   });
+  private subscriptions: Subscription[] = [];
 
-  constructor(public InboxService: InboxService, private confirmationService: ConfirmationService, private dbService: NgxIndexedDBService) {
-    this.InboxService.BehaviorSubject_edite_task.subscribe(
-      () => {
-        if (this.InboxService.for_open_close_box_edite_task() !== 0) {
-          this.isDisabled = true;
-          this.dbService.bulkGet('task', [this.InboxService.for_open_close_box_edite_task()]).subscribe((results: any) => {
-            this.description_input.nativeElement.value = results[0].description
-            this.taskName_input.nativeElement.value = results[0].taskName
-            this.profileForm.value.taskName = results[0].taskName
-            this.profileForm.value.description = results[0].description
-          });
+  constructor(public InboxService: InboxService, private ConfirmationService: ConfirmationService, private DbService: NgxIndexedDBService) {
+    this.subscriptions.push(
+      this.InboxService.subjectEditeTask$.subscribe(
+        () => {
+          if (this.InboxService.isActiveBoxEditeTask() !== 0) {
+            this.isDisabled = true;
+            this.subscriptions.push(
+              this.DbService.bulkGet('task', [this.InboxService.isActiveBoxEditeTask()]).subscribe((results: any) => {
+                this.profileForm.controls['taskName'].reset(results[0].taskName, {emitEvent: false})
+                this.profileForm.controls['description'].reset(results[0].description, {emitEvent: false})
+              })
+            )
+          }
         }
-      }
+      )
     )
+
   }
 
   @ViewChild('taskName') taskName_input: any;
-  @ViewChild('description') description_input: any;
 
   close(event: Event) {
     if (!this.isDisabled) {
-      this.InboxService.for_open_close_box_add_task.set(false)
-      this.InboxService.for_open_close_box_edite_task.set(0)
+      this.InboxService.isActiveBoxAddTask.set(false)
+      this.InboxService.isActiveBoxEditeTask.set(0)
     } else {
       this.confirmation_primeng(event)
     }
   }
 
   confirmation_primeng(event: Event) {
-    this.confirmationService.confirm({
+    this.ConfirmationService.confirm({
       target: event.target as EventTarget,
-      message: 'تغییراتی که ایجاد کرده اید ذخیره نمی شوند. ',
-      header: 'لغو تغییرات؟',
+      message: TEXT_1,
+      header: TEXT_2,
       icon: 'none',
       acceptIcon: "none",
       rejectIcon: "none",
-      acceptLabel: "بله",
-      rejectLabel: "خیر",
+      acceptLabel: TEXT_3,
+      rejectLabel: TEXT_4,
       acceptButtonStyleClass: "p-button-text",
       accept: () => {
-        this.InboxService.for_open_close_box_add_task.set(false)
-        this.InboxService.for_open_close_box_edite_task.set(0)
+        this.InboxService.isActiveBoxAddTask.set(false)
+        this.InboxService.isActiveBoxEditeTask.set(0)
       },
       reject: () => {
       }
@@ -66,34 +72,35 @@ export class FormAddEditTaskComponent {
 
 
   onSubmit() {
-    if (this.InboxService.for_open_close_box_edite_task() === 0) {
-      this.dbService
-        .add('task', this.profileForm.value)
-        .subscribe(() => {
-          this.InboxService.BehaviorSubject_add_task.next(true);
-          this.taskName_input.nativeElement.focus();
-          this.taskName_input.nativeElement.value = "";
-          this.description_input.nativeElement.value = "";
-          this.profileForm.value.taskName = "";
-          this.profileForm.value.description = "";
-          this.isDisabled = false;
-        });
+    if (this.InboxService.isActiveBoxEditeTask() === 0) {
+      this.subscriptions.push(
+        this.DbService
+          .add('task', this.profileForm.value)
+          .subscribe(() => {
+            this.InboxService.subjectAddTask$.next(true);
+            this.taskName_input.nativeElement.focus();
+            this.profileForm.controls['taskName'].reset('', {emitEvent: false})
+            this.profileForm.controls['description'].reset('', {emitEvent: false})
+            this.isDisabled = false;
+          })
+      )
     } else {
-      this.dbService
-        .update('task', {
-          id: this.InboxService.for_open_close_box_edite_task(),
-          description: this.description_input.nativeElement.value,
-          taskName: this.taskName_input.nativeElement.value,
-        })
-        .subscribe((storeData) => {
-          this.InboxService.BehaviorSubject_add_task.next(false);
-          this.taskName_input.nativeElement.value = "";
-          this.description_input.nativeElement.value = "";
-          this.profileForm.value.taskName = "";
-          this.profileForm.value.description = "";
-          this.isDisabled = false;
-        });
-      this.InboxService.for_open_close_box_edite_task.set(0)
+      this.subscriptions.push(
+        this.DbService
+          .update('task', {
+            id: this.InboxService.isActiveBoxEditeTask(),
+            description: this.profileForm.value.description,
+            taskName: this.profileForm.value.taskName,
+          })
+          .subscribe((storeData) => {
+            this.InboxService.subjectAddTask$.next(false);
+            this.taskName_input.nativeElement.focus();
+            this.profileForm.controls['taskName'].reset('', {emitEvent: false})
+            this.profileForm.controls['description'].reset('', {emitEvent: false})
+            this.isDisabled = false;
+          })
+      )
+      this.InboxService.isActiveBoxEditeTask.set(0)
     }
 
 
@@ -102,7 +109,12 @@ export class FormAddEditTaskComponent {
 
   isDisabled: boolean = false;
 
-  check_input(e: any) {
-    this.isDisabled = e.target.value.length >= 1 && e.target.value.trim().length !== 0;
+  check_input(e: KeyboardEvent) {
+    const target: HTMLInputElement = e.target as HTMLInputElement;
+    this.isDisabled = target.value.length >= 1 && target.value.trim().length !== 0;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

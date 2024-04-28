@@ -5,11 +5,13 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class InboxService {
-  constructor() {}
-  for_open_close_box_add_task:WritableSignal<boolean> = signal(false);
-  for_open_close_box_edite_task:WritableSignal<number> = signal(0);
-  is_aside:WritableSignal<boolean> = signal(false);
+  constructor() {
+  }
 
-  BehaviorSubject_add_task: BehaviorSubject<any> = new BehaviorSubject<any>(null);
-  BehaviorSubject_edite_task: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  isActiveBoxAddTask: WritableSignal<boolean> = signal(false);
+  isActiveBoxEditeTask: WritableSignal<number> = signal(0);
+  isActiveAside: WritableSignal<boolean> = signal(false);
+
+  subjectAddTask$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  subjectEditeTask$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 }

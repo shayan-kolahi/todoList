@@ -1,8 +1,8 @@
-<main class="main_section">
-  @defer (){
-    <app-side-bar [class]="this.InboxService.is_aside()?'close':'open'" class="app-side-bar"/>
+<main class="main">
+  @defer () {
+    <app-side-bar [class]="this.InboxService.isActiveAside()?'close':'open'" class="main__side-bar"/>
   }
-  <section [class]="this.InboxService.is_aside()?'open':'close'" class="router-outlet">
+  <section [class]="this.InboxService.isActiveAside()?'open':'close'" class="main__router-outlet">
     <app-header/>
     <router-outlet/>
   </section>

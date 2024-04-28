@@ -1,44 +1,15 @@
+//tailwindcss
 @layer tw-base, primeng, tw-components, tw-utilities;
-
-
 @import "tailwindcss/base.css" layer(tw-base);
 @import "tailwindcss/components.css" layer(tw-components);
 @import "tailwindcss/utilities.css" layer(tw-utilities);
+//tailwindcss
 
 @import "./assets/scss/variabels";
 @import "./assets/scss/fonts";
-
-@import "primeng/resources/themes/arya-blue/theme.css";
-@import "primeng/resources/primeng.css";
-
-
 html , body{
-  font-family: $font-family;
+  font-family: $fontFamily;
   overflow-x: hidden;
 }
-.p-dialog .p-dialog-header .p-dialog-title{
-  font-family: $font-family-Bold;
-}
-.p-dialog-footer > button , .p-dialog.p-confirm-dialog .p-confirm-dialog-message{
-  font-family: $font-family;
-}
-.p-dialog .p-dialog-header {
-  border-bottom: 1px solid #eee;
-}
-.p-dialog{
-  width: 850px;
-}
-.p-dialog .p-dialog-content:last-of-type{
-  padding: 0;
-}
-
-@media (max-width: 992px) {
-  .p-dialog{
-    width: 70%;
-  }
-}
-@media (max-width: 768px) {
-  .p-dialog{
-    width: 80%;
-  }
-}
+@import "./assets/scss/primeng";
+@import "./assets/scss/responsive";

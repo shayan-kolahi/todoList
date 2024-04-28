@@ -1,18 +1,22 @@
 @import "../../../assets/scss/variabels";
-.inbox{
+
+.inbox {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: calc(100vh - 56px);
-  > div{
+
+  &__container {
     width: 800px;
-    > h2 {
+
+    &__h2 {
       color: #000000;
-      font-family: $font-family-Bold;
+      font-family: $fontFamilyBold;
       font-size: 1.5rem;
       margin-bottom: 2rem;
     }
-    > button {
+
+    &__button {
       width: 100%;
       display: flex;
       justify-content: flex-start;
@@ -20,6 +24,7 @@
       color: #666;
       margin: 1rem 0;
       transition: all .3s;
+
       i {
         width: 22px;
         height: 22px;
@@ -29,34 +34,19 @@
         border-radius: 100%;
         margin-left: 6px;
         transition: all .3s;
-        svg{
-          transition: all .3s;
-          width: 18px;
-          height: 18px;
-          fill: $three-color;
-        }
       }
-      &:hover{
-        color: $three-color;
+
+      &:hover {
+        color: $threeColor;
+
         i {
-          background: $three-color;
-          svg{
-            fill: #fff;
+          background: $threeColor;
+
+          &:before {
+            color: #fff;
           }
         }
       }
-    }
-  }
-}
-
-@media (max-width: 992px) {
-  .inbox{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 56px);
-    > div{
-      width: 90%;
     }
   }
 }

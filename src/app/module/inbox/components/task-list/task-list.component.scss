@@ -1,50 +1,55 @@
 @import "../../../../../assets/scss/variabels";
-.task-list{
-  >button {
+
+.task-list {
+  &__button {
     border-bottom: 1px solid #eee;
     padding: 10px 0;
     width: 100%;
-    h2{
-      font-family: $font-family-Bold;
-      font-size: 15px;
-      margin-bottom: 5px;
-      text-align: justify;
-      overflow: hidden;
+
+    &__info {
+      h2 {
+        font-family: $fontFamilyBold;
+        font-size: 15px;
+        margin-bottom: 5px;
+        text-align: justify;
+        overflow: hidden;
         display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-    }
-    h3{
-      font-size: 14px;
-      margin: 0;
-      text-align: justify;
-      overflow: hidden;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+
+      h3 {
+        font-size: 14px;
+        margin: 0;
+        text-align: justify;
+        overflow: hidden;
         display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
     }
-    button{
-      opacity: 0;
-      height: 32px;
-      color: #666;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 7px;
-      gap: 8px;
-      border-radius: 5px;
-      transition: all 0.3s;
-      svg{
+
+    &__buttons {
+      button {
+        opacity: 0;
+        height: 32px;
+        color: #666;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0 7px;
+        gap: 8px;
+        border-radius: 5px;
         transition: all 0.3s;
-        width: 19px;
-        height: 18px;
-      }
-      &:hover{
-        background: #f2efed;
-        color: #000;
+
+        &:hover {
+          background: #f2efed;
+          color: #000;
+        }
       }
     }
-    &:hover{
+
+    &:hover {
       button {
         opacity: 1;
       }
@@ -52,56 +57,65 @@
   }
 }
 
-.modal_task_list{
+.modal-task-list {
   display: flex;
   height: 100%;
   overflow: auto;
-  .sidebar{
+
+  &__sidebar {
     width: 250px;
     background: #fcfaf8;
     padding: 10px;
-    p{
+
+    &__p {
       font-size: 14px;
       color: #666;
-      font-family: $font-family-Bold;
+      font-family: $fontFamilyBold;
       margin: 0;
     }
-    ul{
+
+    &__ul {
       margin: 1rem 0;
-      li{
-        &:not(:last-child){
+
+      li {
+        &:not(:last-child) {
           border-bottom: 1px solid #eee;
           padding-bottom: .5rem;
           margin-bottom: .5rem;
         }
-        a{
+
+        a {
           font-size: 14px;
           color: #666;
-          font-family: $font-family;
+          font-family: $fontFamily;
           margin: 0;
           padding: 8px 10px;
           border-radius: 5px;
           display: flex;
           width: 100%;
           transition: all .3s;
-          &:hover{
-            background: $two-color;
+
+          &:hover {
+            background: $twoColor;
           }
         }
       }
     }
   }
-  .main{
+
+  &__main {
     width: calc(100% - 250px);
     padding: 10px;
-    h2{
-      font-family: $font-family-Bold;
+
+    h2 {
+      font-family: $fontFamilyBold;
       font-size: 15px;
       margin-bottom: 5px;
       text-align: justify;
     }
-    h3{
-      font-family: $font-family;
+
+    h3 {
+      font-family: $fontFamily;
       font-size: 14px;
       margin: 0;
       text-align: justify;
@@ -109,31 +123,3 @@
   }
 }
 
-@media (max-width: 768px) {
-  .modal_task_list {
-    flex-direction: column-reverse;
-    .sidebar{
-      width: 100%;
-    }
-    .main{
-      width: 100%;
-    }
-  }
-  .task-list{
-    >button {
-      flex-wrap: wrap;
-      h2{
-        flex: 1;
-      }
-      h3{
-        flex: 1;
-      }
-      button{
-        opacity: 1;
-      }
-      div.flex{
-        margin-right: auto;
-      }
-    }
-  }
-}

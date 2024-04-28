@@ -1,31 +1,25 @@
-.main_section{
+.main {
   display: flex;
-}
-.app-side-bar{
-  width: 280px;
-  right: 0;
-  transition: .5s all;
-  &.close{
-    position: absolute;
-    right: -100%;
-    z-index: 100;
-  }
-}
-.router-outlet{
-  width: calc(100% - 280px);
-  margin-right: auto;
-  transition: .2s all;
-  &.open{
-    width: 100%;
-  }
-}
-@media (max-width: 1200px) {
-  .router-outlet{
-    width: 100%;
-  }
-  .app-side-bar{
-    position: absolute;
+
+  &__side-bar {
+    width: 280px;
     right: 0;
-    z-index: 100;
+    transition: .5s all;
+
+    &.close {
+      position: absolute;
+      right: -100%;
+      z-index: 100;
+    }
+  }
+
+  &__router-outlet {
+    width: calc(100% - 280px);
+    margin-right: auto;
+    transition: .2s all;
+
+    &.open {
+      width: 100%;
+    }
   }
 }

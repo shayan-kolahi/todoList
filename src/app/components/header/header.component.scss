@@ -1,10 +1,13 @@
-header{
+@import "../../../assets/scss/variabels";
+
+.header {
   padding: 12px;
   width: 100%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  button{
+
+  &__button {
     height: 32px;
     color: #666;
     display: flex;
@@ -14,24 +17,18 @@ header{
     gap: 8px;
     border-radius: 5px;
     transition: all .3s;
-    &.c-flex{
+
+    &.c-flex {
       display: flex;
     }
-    &.c-hidden{
+
+    &.c-hidden {
       display: none;
     }
-    svg{
-      transition: all .3s;
-      width: 19px;
-      height: 18px;
-      fill: #666;
-    }
-    &:hover{
+
+    &:hover {
       background: #f2efed;
       color: #000;
-      svg{
-        fill: #000;
-      }
     }
   }
 }
