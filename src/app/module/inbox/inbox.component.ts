@@ -2,8 +2,6 @@ import {Component, OnDestroy} from '@angular/core';
 import {InboxService} from "../../services/inbox.service";
 import {NgxIndexedDBService} from "ngx-indexed-db";
 import {Subscription} from "rxjs";
-
-
 @Component({
   selector: 'app-inbox',
   templateUrl: './inbox.component.html',
@@ -11,8 +9,8 @@ import {Subscription} from "rxjs";
 })
 export class InboxComponent implements OnDestroy {
   isDataTask: boolean = false;
-  private subscriptions: Subscription[] = [];
-  constructor(public InboxService: InboxService, private DbService: NgxIndexedDBService) {
+  subscriptions: Subscription[] = [];
+  constructor(public InboxService: InboxService, public DbService: NgxIndexedDBService) {
     this.subscriptions.push(
       this.InboxService.subjectAddTask$.subscribe(
         () => {

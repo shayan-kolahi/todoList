@@ -9,6 +9,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ShareModule} from "./module/share/share.module";
 import {TooltipModule} from 'primeng/tooltip';
 import {InputTextModule} from "primeng/inputtext";
+import {MessageService} from "primeng/api";
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {InputTextModule} from "primeng/inputtext";
     TooltipModule,
     InputTextModule
   ],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

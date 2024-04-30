@@ -15,7 +15,7 @@ import {TEXT_3, TEXT_4, TEXT_5} from "../../../../../assets/lang/fa";
 export class TaskListComponent implements OnDestroy {
   dataTask: any;
   private subscriptions: Subscription[] = [];
-  constructor(private ConfirmationService: ConfirmationService, private InboxService: InboxService, private DbService: NgxIndexedDBService) {
+  constructor(private ConfirmationService: ConfirmationService, public InboxService: InboxService, private DbService: NgxIndexedDBService) {
     this.subscriptions.push(
       this.InboxService.subjectAddTask$.subscribe(
         () => {
@@ -29,7 +29,7 @@ export class TaskListComponent implements OnDestroy {
     )
   }
 
-  remove(id: any, event: MouseEvent) {
+  remove(id: any, event: Event) {
     event.stopPropagation();
     this.ConfirmationService.confirm({
       target: event.target as EventTarget,
@@ -54,7 +54,7 @@ export class TaskListComponent implements OnDestroy {
     });
   }
 
-  edite(id: any, event: MouseEvent) {
+  edite(id: any, event: Event) {
     event.stopPropagation();
     this.InboxService.isActiveBoxEditeTask.set(id)
     this.InboxService.subjectEditeTask$.next(true);

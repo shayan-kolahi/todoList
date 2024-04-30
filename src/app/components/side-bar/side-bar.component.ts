@@ -9,12 +9,10 @@ import {Subscription} from "rxjs";
   styleUrl: './side-bar.component.scss',
 })
 export class SideBarComponent implements OnDestroy {
-
-
   dataTask: number = 0;
-  private subscriptions: Subscription[] = [];
+  subscriptions: Subscription[] = [];
 
-  constructor(private InboxService: InboxService, private DbService: NgxIndexedDBService) {
+  constructor(public InboxService: InboxService, private DbService: NgxIndexedDBService) {
     this.subscriptions.push(
       this.InboxService.subjectAddTask$.subscribe(
         () => {
